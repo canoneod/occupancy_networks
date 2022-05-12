@@ -75,7 +75,7 @@ def main(args):
     with open(args.in_file, 'r') as f:
         lines = f.readlines()
 
-    data = np.array([[float(e) for e in l.split()] for l in lines])
+    data = np.array([[float(e) for e in l.split()] for l in lines]) # 각 metadata를 data로 추가
     out_dict = {}
     for idx in range(data.shape[0]):
         K, RT = getBlenderProj(data[idx, 0], data[idx, 1], data[idx, 3])
