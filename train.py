@@ -63,12 +63,12 @@ val_loader = torch.utils.data.DataLoader(
 
 
 # For visualizations
-vis_loader = torch.utils.data.DataLoader(
-    val_dataset, batch_size=12, shuffle=True,
-    collate_fn=data.collate_remove_none,
-    worker_init_fn=data.worker_init_fn)
-data_vis = next(iter(vis_loader))
-
+#vis_loader = torch.utils.data.DataLoader(
+#    val_dataset, batch_size=12, shuffle=True,
+#    collate_fn=data.collate_remove_none,
+#    worker_init_fn=data.worker_init_fn)
+#data_vis = next(iter(vis_loader))
+#
 # Model
 model = config.get_model(cfg, device=device, dataset=train_dataset)
 
@@ -130,10 +130,10 @@ while True:
                   % (epoch_it, it, loss))
 
         # Visualize output
-        if visualize_every > 0 and (it % visualize_every) == 0:
-            print('Visualizing')
-            trainer.visualize(data_vis)
-
+#        if visualize_every > 0 and (it % visualize_every) == 0:
+#            print('Visualizing')
+#            trainer.visualize(data_vis)
+#
         # Save checkpoint
         if (checkpoint_every > 0 and (it % checkpoint_every) == 0):
             print('Saving checkpoint')
@@ -145,13 +145,17 @@ while True:
             print('Backup checkpoint')
             checkpoint_io.save('model_%d.pt' % it, epoch_it=epoch_it, it=it,
                                loss_val_best=metric_val_best)
+            print("backup 통과")                   
         # Run validation
         if validate_every > 0 and (it % validate_every) == 0:
+            # evaluate 단계에서 문제발생?
+            print("1")
             eval_dict = trainer.evaluate(val_loader)
+            print("2")
             metric_val = eval_dict[model_selection_metric]
             print('Validation metric (%s): %.4f'
                   % (model_selection_metric, metric_val))
-
+            print("validation 통과")
             for k, v in eval_dict.items():
                 logger.add_scalar('val/%s' % k, v, it)
 

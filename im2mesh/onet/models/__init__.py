@@ -59,9 +59,9 @@ class OccupancyNetwork(nn.Module):
             sample (bool): whether to sample for z
         '''
         batch_size = p.size(0)
-        c = self.encode_inputs(inputs)
-        z = self.get_z_from_prior((batch_size,), sample=sample)
-        p_r = self.decode(p, z, c, **kwargs)
+        c = self.encode_inputs(inputs) # encode input into latent c
+        z = self.get_z_from_prior((batch_size,), sample=sample) # getting prior?
+        p_r = self.decode(p, z, c, **kwargs) # neural net getting sampled p 
         return p_r
 
     def compute_elbo(self, p, occ, inputs, **kwargs):
@@ -130,7 +130,7 @@ class OccupancyNetwork(nn.Module):
         return q_z
 
     def get_z_from_prior(self, size=torch.Size([]), sample=True):
-        ''' Returns z from prior distribution.
+        ''' Returns z from prior distribution. (prior : 현재 dataset의 batch에 대한 것)
 
         Args:
             size (Size): size of z

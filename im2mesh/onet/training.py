@@ -62,7 +62,7 @@ class Trainer(BaseTrainer):
         threshold = self.threshold
         eval_dict = {}
 
-        # Compute elbo
+        # Compute elbo 
         points = data.get('points').to(device)
         occ = data.get('points.occ').to(device)
 

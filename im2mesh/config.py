@@ -128,7 +128,7 @@ def get_dataset(mode, cfg, return_idx=False, return_category=False):
         'test': cfg['data']['test_split'],
     }
 
-    split = splits[mode]
+    split = splits[mode] # mode? "train", "val" str으로 들어옴, 그중에서 어떤 것으로 받아올것인지 결정
 
     # Create dataset
     if dataset_type == 'Shapes3D':
@@ -172,7 +172,6 @@ def get_dataset(mode, cfg, return_idx=False, return_category=False):
         raise ValueError('Invalid dataset "%s"' % cfg['data']['dataset'])
  
     return dataset
-
 
 def get_inputs_field(mode, cfg):
     ''' Returns the inputs fields.

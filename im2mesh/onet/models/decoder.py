@@ -16,7 +16,7 @@ class Decoder(nn.Module):
     Args:
         dim (int): input dimension
         z_dim (int): dimension of latent code z
-        c_dim (int): dimension of latent conditioned code c
+        c_dim (int): dimension of latent conditioned code c conditioned code가 뭐지?
         hidden_size (int): hidden size of Decoder network
         leaky (bool): whether to use leaky ReLUs
     '''

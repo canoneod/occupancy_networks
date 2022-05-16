@@ -7,6 +7,7 @@ from tqdm import tqdm
 import time
 from collections import defaultdict
 import pandas as pd
+
 from im2mesh import config
 from im2mesh.checkpoints import CheckpointIO
 from im2mesh.utils.io import export_pointcloud
@@ -27,8 +28,10 @@ device = torch.device("cuda" if is_cuda else "cpu")
 
 out_dir = cfg['training']['out_dir']
 generation_dir = os.path.join(out_dir, cfg['generation']['generation_dir'])
+print("gener dir : ", generation_dir)
 out_time_file = os.path.join(generation_dir, 'time_generation_full.pkl')
 out_time_file_class = os.path.join(generation_dir, 'time_generation.pkl')
+
 
 batch_size = cfg['generation']['batch_size']
 input_type = cfg['data']['input_type']
@@ -42,7 +45,10 @@ dataset = config.get_dataset('test', cfg, return_idx=True)
 # Model
 model = config.get_model(cfg, device=device, dataset=dataset)
 
-checkpoint_io = CheckpointIO(out_dir, model=model)
+print(cfg['test']['model_file'], out_dir)
+#out_dir = os.path.join()
+# url에서 가져오는 경우 어떤 폴더를 참조하는 것이 아니라 괜찮음
+checkpoint_io = CheckpointIO(out_dir, model=model) # load checkpoint
 checkpoint_io.load(cfg['test']['model_file'])
 
 # Generator
@@ -62,6 +68,7 @@ if generate_pointcloud and not hasattr(generator, 'generate_pointcloud'):
 
 
 # Loader
+#print(dataset)
 test_loader = torch.utils.data.DataLoader(
     dataset, batch_size=1, num_workers=0, shuffle=False)
 
@@ -154,6 +161,7 @@ for it, data in enumerate(tqdm(test_loader)):
 
         # Write output
         mesh_out_file = os.path.join(mesh_dir, '%s.off' % modelname)
+        #print(mesh_out_file)
         mesh.export(mesh_out_file)
         out_file_dict['mesh'] = mesh_out_file
 

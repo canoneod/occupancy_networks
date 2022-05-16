@@ -14,7 +14,7 @@ class CheckpointIO(object):
     '''
     def __init__(self, checkpoint_dir='./chkpts', **kwargs):
         self.module_dict = kwargs
-        self.checkpoint_dir = checkpoint_dir
+        self.checkpoint_dir = checkpoint_dir #  mug_tests/generation에 있는가?
         if not os.path.exists(checkpoint_dir):
             os.makedirs(checkpoint_dir)
 

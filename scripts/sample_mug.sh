@@ -8,7 +8,9 @@ while read line || [ -n "$line" ] ; do
 
     echo "sample file into voxel, pcd, points"
     python sample_mesh.py $current_input_path/2_watertight \
-      --points_folder $current_input_path
+	--voxels_folder $current_input_path\
+      #--points_folder $current_input_path \
+      #--packbits
       #--pointcloud_folder $current_input_path \
       #--voxels_folder $current_input_path \
       #--mesh_folder $current_input_path \

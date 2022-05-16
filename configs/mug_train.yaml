@@ -15,7 +15,7 @@ data:
   model_file: model.off
   watertight_file: model_watertight.off
   img_folder: img_mug
-  img_size: 137
+  img_size: 224
   img_with_camera: false
   img_augment: false
   n_views: 24
@@ -34,18 +34,18 @@ model:
   encoder_kwargs: {}
   encoder_latent_kwargs: {}
   multi_gpu: false
-  c_dim: 512
-  z_dim: 64
+  c_dim: 256 # 변경
+  z_dim: 0 # 변경 
   use_camera: false
   dmc_weight_prior: 10.
 training:
   out_dir:  out/mug
-  batch_size: 12
-  print_every: 6
-  visualize_every: 6
-  checkpoint_every: 12
-  validate_every: 20
-  backup_every: 100
+  batch_size: 6
+  print_every: 10
+  visualize_every: 2000
+  checkpoint_every: 1000
+  validate_every: 2000
+  backup_every: 1000
   eval_sample: false
   model_selection_metric: loss
   model_selection_mode: minimize

@@ -1,0 +1,27 @@
+method: onet
+data:
+  dataset: images # input image path
+  path: mug_testsets # input data path 
+  points_subsample: 2048 
+model:
+  encoder_latent: null
+  decoder: simple
+  encoder: resnet18 
+  c_dim: 256 # resnet18의 output size에 맞춰준것? (training 시 결정하는건가? size맞춰줘야됨)
+  z_dim: 0
+training:
+  out_dir:  mug_testsets # training 시켰던 디렉토리?
+  batch_size: 6
+  model_selection_metric: iou
+  model_selection_mode: maximize
+  visualize_every: 2000
+  validate_every: 2000
+test:
+  threshold: 0.2
+  eval_mesh: true
+  eval_pointcloud: false
+generation:
+  generation_dir: generation
+  refinement_step: 30
+  simplify_nfaces: 5000
+

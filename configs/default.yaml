@@ -34,8 +34,8 @@ model:
   encoder_kwargs: {}
   encoder_latent_kwargs: {}
   multi_gpu: false
-  c_dim: 512
-  z_dim: 64
+  c_dim: 256
+  z_dim: 0
   use_camera: false
   dmc_weight_prior: 10.
 training:
